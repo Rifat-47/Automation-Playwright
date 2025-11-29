@@ -6,7 +6,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-/config
-/data
+/config/pages.json 
+/config/utils.js
+/data/testData.json
 
 

@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
-import { baseUrl, adminUser } from './../config/all.js';
+import { baseUrl, adminUser } from './../config/utils.js';
 const testData = require('../data/testData.json');
 
-console.log(baseUrl);
-console.log(adminUser.email);
-console.log(testData.validUser.email);
+// console.log(baseUrl);
+// console.log(adminUser.email);
+// console.log(testData.validUserCredentials.email);
 
 
 test('Login with incorrect email: shows error toast', async ({ page }) => {
     await page.goto(baseUrl);
-    await page.locator('#input-7').fill(testData.validUser.email);
-    await page.locator('#input-9').fill(adminUser.password);
+    await page.locator('#input-7').fill(testData.invalidEmailCredentials.email);
+    await page.locator('#input-9').fill(testData.invalidEmailCredentials.password);
     await page.getByRole('button', { name: 'Login' }).click();
 
     // Wait for the toast message to appear
@@ -24,9 +24,9 @@ test('Login with incorrect email: shows error toast', async ({ page }) => {
 
 
 test('Login with incorrect password: shows error toast', async ({ page }) => {
-    await page.goto('https://rifat-blubird.mybrokercloud.com/login');
-    await page.locator('#input-7').fill('superadminextra@yopmail.com');
-    await page.locator('#input-9').fill('R@1234567');
+    await page.goto(baseUrl);
+    await page.locator('#input-7').fill(testData.invalidPasswordCredentials.email);
+    await page.locator('#input-9').fill(testData.invalidPasswordCredentials.password);
     await page.getByRole('button', { name: 'Login' }).click();
 
     // Wait for the toast message to appear
@@ -39,11 +39,24 @@ test('Login with incorrect password: shows error toast', async ({ page }) => {
     });
 });
 
+test('Login with empty credentials: shows validation messages', async ({ page }) => {
+    await page.goto(baseUrl);
+    await page.getByRole('button', { name: 'Login' }).click();
+
+    // Wait for validation messages to appear
+    const toast = page.locator('body');
+
+    // Assert that it contains the expected text
+    await expect(toast).toHaveText(/Validation failed/i, {
+        timeout: 2000,
+    });
+});
+
 
 test('Login successful > dashboard', async ({ page }) => {
-    await page.goto('https://rifat-blubird.mybrokercloud.com/login');
-    await page.locator('#input-7').fill('superadminextra@yopmail.com');
-    await page.locator('#input-9').fill('R@123456');
+    await page.goto(baseUrl);
+    await page.locator('#input-7').fill(testData.validUserCredentials.email);
+    await page.locator('#input-9').fill(testData.validUserCredentials.password);
     await page.getByRole('button', { name: 'Login' }).click();
 
     // waiting for dashboard url

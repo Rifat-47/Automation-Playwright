@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+const testData = require('../data/testData.json');
+import { baseUrl, adminUser } from './../config/utils.js';
 
 // === Helper: Get label like "Nov-2025" ===
 function currentMonthLabel() {
@@ -44,9 +46,9 @@ async function getCurrentMonthUserCount(page) {
 test('login & check user creation from dashboard', async ({ page }, testInfo) => {
     test.setTimeout(60000);
     // ---- Login ----
-    await page.goto('https://rifat-blubird.mybrokercloud.com/login');
-    await page.locator('#input-7').fill('superadminextra@yopmail.com');
-    await page.locator('#input-9').fill('R@123456');
+    await page.goto(baseUrl);
+    await page.locator('#input-7').fill(adminUser.email);
+    await page.locator('#input-9').fill(adminUser.password);
     await page.getByRole('button', { name: 'Login' }).click();
     await page.waitForURL('**/dashboard');
 
