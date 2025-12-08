@@ -1,6 +1,6 @@
 
 # Playwright
-node_modules/
+/node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
@@ -9,5 +9,3 @@ node_modules/
 /config/pages.json 
 /config/utils.js
 /data/testData.json
-
-

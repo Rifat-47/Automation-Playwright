@@ -1,0 +1,105 @@
+// later
+FrameLocator
+
+// command
+npx playwright test
+    Runs the end-to-end tests.
+
+npx playwright test --ui
+    Starts the interactive UI mode.
+
+npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+npx playwright test example
+    Runs the tests in a specific file.
+
+npx playwright test --debug
+    Runs the tests in debug mode.
+
+npx playwright codegen
+    Auto generate tests with Codegen.
+
+// learn
+create an element using js 
+delete an element using js 
+regular expression js 
+no of count of an element 
+
+
+// run test:
+    npx playwright test
+    - runs all test inside ./tests, mentioned in playwright.config.js
+
+// show report:
+    npx playwright show-report
+
+// show browser: --headed
+// single browser: --project=chromium
+// run single file: npx playwright test tests/login.spec.js
+// open testing ui: --ui    [better for debugging]
+
+// Doc Link: https://playwright.dev/docs/locators
+// locators api
+getByRole() -> buttons, checkboxes, heading, list, table etc
+getByText()
+getByLabel()
+getByPlaceholder()
+getByAltText()
+getByTitle()
+getByTestId()
+
+// locate by css or xpath 
+await page.locator('css=button').click();
+await page.locator('xpath=//button').click();
+
+// filter locators
+await page.getByRole('listitem)
+    .filter({ hasText: 'Product 2'})
+    .getByRole('button', { name: 'Add to Cart'})
+
+// 5 in-stock items
+await expect(page.getByRole('listitem').filter({ hasNotText: 'Out of stock' })).toHaveCount(5);
+
+// filter by child
+await page.getByRole('listitem')
+    .filter({ has: page.getByRole('heading', { name : 'Product 2'})})
+    .getByRole('button', { name: 'Add to Cart'}).click();
+
+// match two locators
+const button = page.getByRole('button').and(page.getByTitle('Subscribe'));
+
+// nth items -> first() or last() or nth(n)
+const banana = await page.getByRole('listitem').nth(1);
+
+
+
+// actions
+fill()
+hover()
+click()
+check()
+uncheck()
+focus()
+press()
+setInputFiles()
+selectOption()
+
+
+// assertions
+toBeVisible()
+toBeHidden()
+toHaveText(text)
+toHaveValue(value)
+toBeEnabled()
+toBeDisabled()
+toBeChecked()
+toBeFocused()
+toHaveAttribute(attr, value)
+toHaveCount(count)
+toContainText()
+toHaveTitle()
+toHaveUrl()
+
+// running codegen
+npx playwright codegen link
