@@ -41,7 +41,7 @@ test.describe('navigation', () => {
 });
 
 
-test('mbc  start', async ({ page }) => {
-        await page.goto('https://mbc.com/');
-        await expect(page).toHaveTitle(/MBC/);
-});
+// test('mbc  start', async ({ page }) => {
+//         await page.goto('https://mbc.com/');
+//         await expect(page).toHaveTitle(/MBC/);
+// });

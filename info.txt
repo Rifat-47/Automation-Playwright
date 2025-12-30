@@ -36,7 +36,9 @@ no of count of an element
 
 // show browser: --headed
 // single browser: --project=chromium
+// multi browser: npx playwright test --project webkit --project firefox
 // run single file: npx playwright test tests/login.spec.js
+// run specific test: npx playwright test -g "add a todo item"
 // open testing ui: --ui    [better for debugging]
 
 // Doc Link: https://playwright.dev/docs/locators
@@ -103,3 +105,24 @@ toHaveUrl()
 
 // running codegen
 npx playwright codegen link
+
+// emulate viewport
+npx playwright codegen --viewport-size="800,600" playwright.dev
+
+// emulate devices
+npx playwright codegen --device="iPhone 13" playwright.device
+
+// emulate color scheme
+npx playwright codegen --color-scheme=dark playwright.dev
+
+// emulate timezone, geolocation, language
+npx playwright codegen --timezone="Europe/Rome" --geolocation="41.890221,12.492348" --lang="it-IT" bing.com/maps
+
+// preserve authenticated state
+npx playwright codegen github.com/microsoft/playwright --save-storage=auth.json
+
+// load authenticated state
+npx playwright codegen --load-storage=auth.json github.com/microsoft/playwright
+
+
+// 
