@@ -1,20 +1,29 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+import { test, expect } from '@playwright/test';
 
-test( 'test  rifat', (async () => {
+test( 'test  rifat', (async ({ page }) => {
         
         await page.goto('H:/Automation Playwright/rifat/index.html'); // Ensures URL is set for toHaveUrl assertion
 
         // Actions
+        await expect(page.locator('#text-input')).toBeDisabled();
+        
+        await page.locator('#enable-btn').click(); // Click a button to enable the input
+        
         // fill(): Fill a text input
         await page.locator('#text-input').fill('Filled Text');
 
         // hover(): Hover over a button
         await page.locator('#hover-btn').hover();
+        await expect(page.locator('#hover-btn')).toHaveText('Hovered!'); // Verify hover effect
+
+        await page.locator('body').hover(); // Unhover again to reset
+        await expect(page.locator('#hover-btn')).toHaveText('Hover Me');
 
         // click(): Click a button (this will enable the input for later assertions)
-        await page.locator('#enable-btn').click(); // Assume this simulates enabling, but in real: use JS if needed
+        // await page.locator('#enable-btn').click(); // Assume this simulates enabling, but in real: use JS if needed
 
         // check(): Check a checkbox
         await page.locator('#checkbox').check();
@@ -41,7 +50,7 @@ test( 'test  rifat', (async () => {
         await page.waitForTimeout(2000);
 
         // Assertions (using expect)
-        const { expect } = require('@playwright/test');
+        // const { expect } = require('@playwright/test');
 
         // toBeVisible(): Check if an element is visible
         await expect(page.locator('#header')).toBeVisible();
@@ -84,9 +93,9 @@ test( 'test  rifat', (async () => {
         // toHaveTitle(): Page title
         await expect(page).toHaveTitle('Playwright Demo Page');
 
-        // toHaveUrl(): Page URL (about:blank for this in-memory page)
-        await expect(page).toHaveURL('about:blank');
+        await page.locator('#click-btn').click();
+        await expect(page.locator('#hidden-div')).toBeHidden();
 
-        // Cleanup
-        await browser.close();
+        // toHaveUrl(): Page URL (about:blank for this in-memory page)
+        await expect(page).toHaveURL('file:///H:/Automation%20Playwright/rifat/index.html');
 }));
