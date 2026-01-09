@@ -2,16 +2,23 @@
     <head><title>Playwright Demo Page</title></head>
     <body>
         <h1 id="header">Demo Header</h1>
+        <hr>
         <input id="text-input" type="text" value="Filled Text" placeholder="text field" disabled>
         <button id="enable-btn">Enable Input</button>
+        <hr>
         <button id="hover-btn">Hover Me</button>
+        <hr>
         <button id="click-btn" onclick="showAndHide()">Click to Show</button>
         <div id="hidden-div" style="display:none;">Now Visible</div>
-        <input id="checkbox" type="checkbox">
+        <hr>
+        <input id="checkbox" type="checkbox">Checkbox Label</input>
+        <hr>
         <input id="file-input" type="file">
+        <hr>
         <select id="select-box">
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
         </select>
         <hr>
         <div id="focus-div" tabindex="0">Focusable Div</div>
@@ -19,7 +26,9 @@
             <li>Item 1</li>
             <li>Item 2</li>
         </ul>
+        <hr>
         <p id="partial-text">This contains partial text: ABC123</p>
+        <hr>
         <img id="attr-img" src="land1.jpg" height="200px" alt="Image" class="custom-class">
 
         <script src="main.js"></script>

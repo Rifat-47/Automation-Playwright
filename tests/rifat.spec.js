@@ -27,12 +27,14 @@ test( 'test  rifat', (async ({ page }) => {
 
         // check(): Check a checkbox
         await page.locator('#checkbox').check();
+        await expect(page.locator('#checkbox')).toBeChecked(); // Verify it's checked
 
         // uncheck(): Uncheck the same checkbox
         await page.locator('#checkbox').uncheck();
 
         // focus(): Focus on an element
         await page.locator('#focus-div').focus();
+        await expect(page.locator('#focus-div')).toBeFocused(); // Verify focus
 
         // press(): Press a key (e.g., on focused element)
         await page.locator('#focus-div').press('Enter');
@@ -95,6 +97,10 @@ test( 'test  rifat', (async ({ page }) => {
 
         await page.locator('#click-btn').click();
         await expect(page.locator('#hidden-div')).toBeHidden();
+
+        await expect(page.locator('#select-box > option')).toHaveCount(3)
+        await expect(page.locator('#select-box')).toHaveValue('option2');
+        // await expect(page.locator('#select-box')).toHaveValue('option2');
 
         // toHaveUrl(): Page URL (about:blank for this in-memory page)
         await expect(page).toHaveURL('file:///H:/Automation%20Playwright/rifat/index.html');
